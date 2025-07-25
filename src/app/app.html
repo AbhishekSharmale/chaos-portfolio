@@ -1,0 +1,35 @@
+<div class="chaos-container">
+  <div class="terminal-header">
+    <span class="terminal-title">{{ title }} - Terminal v2.0.1</span>
+    <div class="terminal-controls">
+      <span class="control minimize"></span>
+      <span class="control maximize"></span>
+      <span class="control close"></span>
+    </div>
+  </div>
+  
+  <nav class="chaos-nav">
+    <a routerLink="/welcome-to-chaos" [class.active]="currentRoute === '/welcome-to-chaos'">~/home</a>
+    <a routerLink="/solutions-nobody-wanted" [class.active]="currentRoute === '/solutions-nobody-wanted'">./projects</a>
+    <a routerLink="/digital-diary-of-despair" [class.active]="currentRoute === '/digital-diary-of-despair'">cat blog.md</a>
+    <a routerLink="/readme-dot-md" [class.active]="currentRoute === '/readme-dot-md'">man abhishek</a>
+  </nav>
+  
+  <main class="chaos-main">
+    <router-outlet></router-outlet>
+  </main>
+  
+  <div class="chaos-console">
+    <div class="console-log" *ngFor="let log of consoleLogs">
+      <span class="timestamp">{{ log.timestamp }}</span>
+      <span class="level" [ngClass]="log.level">{{ log.level }}</span>
+      <span class="message">{{ log.message }}</span>
+    </div>
+  </div>
+  
+  <div class="floating-notification" *ngIf="showNotification">
+    <span class="notification-icon">⚠️</span>
+    <span class="notification-text">{{ notificationText }}</span>
+    <button class="notification-close" (click)="closeNotification()">×</button>
+  </div>
+</div>

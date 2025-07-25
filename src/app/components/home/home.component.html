@@ -1,0 +1,54 @@
+<div class="home-container">
+  <div class="ascii-section">
+    <pre class="ascii-art">{{ asciiArt }}</pre>
+    <div class="typing-animation">
+      <span class="prompt">abhishek@chaos:~$ </span>
+      <span class="typing-text">{{ typingText }}</span>
+      <span class="cursor">█</span>
+    </div>
+  </div>
+
+  <div class="status-grid">
+    <div class="status-card" *ngFor="let status of systemStatus">
+      <div class="status-header">
+        <span class="status-name">{{ status.name }}</span>
+        <span class="status-badge" [style.background-color]="getStatusColor(status.status)">
+          {{ status.status }}
+        </span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" 
+             [style.width.%]="status.value"
+             [style.background-color]="getStatusColor(status.status)">
+        </div>
+      </div>
+      <div class="status-value">{{ status.value }}%</div>
+    </div>
+  </div>
+
+  <div class="intro-section">
+    <div class="glitch-text" data-text="ABHISHEK">ABHISHEK</div>
+    <p class="subtitle">The Chaos Engineer</p>
+    <p class="description">
+      I solve problems nobody has with tools nobody asked for. 
+      Currently overengineering solutions to underengineered problems.
+    </p>
+    
+    <div class="quick-stats">
+      <div class="stat">
+        <span class="stat-number">∞</span>
+        <span class="stat-label">Bugs Created</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">42</span>
+        <span class="stat-label">Coffee/Day</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">404</span>
+        <span class="stat-label">Sleep Not Found</span>
+      </div>
+    </div>
+  </div>
+  
+  <app-fake-terminal></app-fake-terminal>
+</div>

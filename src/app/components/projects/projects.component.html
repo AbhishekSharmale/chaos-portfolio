@@ -1,0 +1,120 @@
+<div class="projects-container">
+  <div class="projects-header">
+    <h1 class="section-title">
+      <span class="prompt">abhishek@chaos:~/projects$ </span>
+      <span class="command">ls -la solutions-nobody-wanted/</span>
+    </h1>
+    <p class="section-subtitle">A collection of overengineered solutions to underengineered problems</p>
+    
+    <div class="demo-links">
+      <strong>Demo Links:</strong>
+      <a routerLink="/project/rice-cooker-monitoring">🍚 Rice Cooker Story</a> |
+      <a routerLink="/project/kubernetes-dating-app">💕 K8s Dating Story</a> |
+      <a routerLink="/project/ai-coffee-optimizer">☕ AI Coffee Story</a>
+    </div>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card" 
+         *ngFor="let project of projects" 
+         [ngClass]="'style-' + project.style">
+      
+      <!-- Terminal Style -->
+      <div *ngIf="project.style === 'terminal'" class="terminal-card">
+        <div class="terminal-header">
+          <div class="terminal-controls">
+            <span class="control close"></span>
+            <span class="control minimize"></span>
+            <span class="control maximize"></span>
+          </div>
+          <span class="terminal-title">{{ project.title }}</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="prompt">$ </span>
+            <span class="command">cat README.md</span>
+          </div>
+          <div class="terminal-output">{{ project.description }}</div>
+          <div class="terminal-line">
+            <span class="prompt">$ </span>
+            <span class="command">docker ps</span>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-tag" *ngFor="let tech of project.tech">{{ tech }}</span>
+          </div>
+          <div class="status-line">
+            STATUS: <span [style.color]="getStatusColor(project.status)">{{ project.status }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub Issue Style -->
+      <div *ngIf="project.style === 'github'" class="github-card">
+        <div class="github-header">
+          <span class="issue-icon">🐛</span>
+          <span class="issue-title">{{ project.title }}</span>
+          <span class="issue-status" [style.background-color]="getStatusColor(project.status)">
+            {{ project.status }}
+          </span>
+        </div>
+        <div class="github-body">
+          <p class="issue-description">{{ project.description }}</p>
+          <div class="labels">
+            <span class="label" *ngFor="let tech of project.tech">{{ tech }}</span>
+          </div>
+          <div class="github-meta">
+            <span class="meta-item">opened 3 days ago by abhishek</span>
+            <span class="meta-item">• 42 comments</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Docker Logs Style -->
+      <div *ngIf="project.style === 'docker'" class="docker-card">
+        <div class="docker-header">
+          <span class="docker-icon">🐳</span>
+          <span class="container-name">{{ getSlugifiedTitle(project.title) }}</span>
+        </div>
+        <div class="docker-logs">
+          <div class="log-line">
+            <span class="timestamp">2024-01-15T10:30:45.123Z</span>
+            <span class="log-level info">INFO</span>
+            <span class="log-message">{{ project.description }}</span>
+          </div>
+          <div class="log-line">
+            <span class="timestamp">2024-01-15T10:30:46.456Z</span>
+            <span class="log-level warn">WARN</span>
+            <span class="log-message">Dependencies: {{ project.tech.join(', ') }}</span>
+          </div>
+          <div class="log-line">
+            <span class="timestamp">2024-01-15T10:30:47.789Z</span>
+            <span class="log-level error">ERROR</span>
+            <span class="log-message">Status: {{ project.status }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- JSON Response Style -->
+      <div *ngIf="project.style === 'json'" class="json-card">
+        <div class="json-header">
+          <span class="method">GET</span>
+          <span class="endpoint">/api/projects/{{ getSlugifiedTitle(project.title) }}</span>
+          <span class="status-code">200 OK</span>
+        </div>
+        <pre class="json-body">{{ getJsonString(project) }}</pre>
+      </div>
+
+      <!-- Common footer for all styles -->
+      <div class="card-footer">
+        <div class="footer-buttons">
+          <a [routerLink]="['/project', getProjectId(project.title)]" class="project-link primary">
+            📖 Read Full Story
+          </a>
+          <a *ngIf="project.link" [href]="project.link" target="_blank" class="project-link secondary">
+            🐙 GitHub →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

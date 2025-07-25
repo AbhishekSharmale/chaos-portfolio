@@ -1,0 +1,85 @@
+<div class="blog-container">
+  <div class="blog-header">
+    <h1 class="section-title">
+      <span class="prompt">abhishek@chaos:~/blog$ </span>
+      <span class="command">cat digital-diary-of-despair.md</span>
+    </h1>
+    <p class="section-subtitle">Where overengineering meets existential crisis</p>
+  </div>
+
+  <div class="blog-stats">
+    <div class="stat">
+      <span class="stat-number">{{ blogPosts.length }}</span>
+      <span class="stat-label">Posts Written</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">∞</span>
+      <span class="stat-label">Regret Level</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">404</span>
+      <span class="stat-label">Readers Found</span>
+    </div>
+  </div>
+
+  <div class="blog-posts">
+    <article class="blog-post" *ngFor="let post of blogPosts; trackBy: trackByTitle">
+      <div class="post-header">
+        <div class="post-meta">
+          <span class="post-date">{{ post.date }}</span>
+          <span class="post-separator">•</span>
+          <span class="post-read-time">{{ post.readTime }} read</span>
+          <span class="post-separator">•</span>
+          <span class="post-status" [style.color]="getStatusColor(post.status)">
+            {{ getStatusIcon(post.status) }} {{ post.status.toUpperCase() }}
+          </span>
+        </div>
+      </div>
+      
+      <h2 class="post-title">{{ post.title }}</h2>
+      
+      <p class="post-excerpt">{{ post.excerpt }}</p>
+      
+      <div class="post-tags">
+        <span class="tag" *ngFor="let tag of post.tags">#{{ tag }}</span>
+      </div>
+      
+      <div class="post-footer">
+        <button class="read-more-btn" [disabled]="post.status === 'deprecated'">
+          <span *ngIf="post.status === 'published'">Read More →</span>
+          <span *ngIf="post.status === 'draft'">Coming Soon™</span>
+          <span *ngIf="post.status === 'deprecated'">Deprecated ⚠️</span>
+        </button>
+        
+        <div class="post-actions">
+          <button class="action-btn">
+            <span class="icon">👍</span>
+            <span class="count">{{ getRandomNumber(5, 50) }}</span>
+          </button>
+          <button class="action-btn">
+            <span class="icon">💬</span>
+            <span class="count">{{ getRandomNumber(0, 15) }}</span>
+          </button>
+          <button class="action-btn">
+            <span class="icon">🔄</span>
+            <span class="count">{{ getRandomNumber(0, 8) }}</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="blog-footer">
+    <div class="terminal-prompt">
+      <span class="prompt">abhishek@chaos:~/blog$ </span>
+      <span class="command">echo "Thanks for reading my digital diary of despair!"</span>
+    </div>
+    <div class="terminal-output">
+      Thanks for reading my digital diary of despair!
+    </div>
+    <div class="terminal-prompt">
+      <span class="prompt">abhishek@chaos:~/blog$ </span>
+      <span class="cursor">█</span>
+    </div>
+  </div>
+</div>

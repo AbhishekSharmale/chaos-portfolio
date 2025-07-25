@@ -1,0 +1,373 @@
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.projects-header {
+  margin-bottom: 40px;
+  
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+    
+    .prompt {
+      color: var(--matrix-green);
+    }
+    
+    .command {
+      color: var(--text-light);
+    }
+  }
+  
+  .section-subtitle {
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+  
+  .demo-links {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--dark-bg);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    
+    a {
+      color: var(--matrix-green);
+      text-decoration: none;
+      margin: 0 8px;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  
+  .project-card:nth-child(1) { transform: rotate(-0.8deg) translateY(-10px); }
+  .project-card:nth-child(2) { transform: rotate(0.5deg) translateY(15px); }
+  .project-card:nth-child(3) { transform: rotate(-0.3deg) translateY(-5px); }
+  .project-card:nth-child(4) { transform: rotate(1deg) translateY(8px); }
+  .project-card:nth-child(5) { transform: rotate(-0.6deg) translateY(-12px); }
+  .project-card:nth-child(6) { transform: rotate(0.4deg) translateY(10px); }
+}
+
+.project-card {
+  background: var(--dark-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-4px) rotate(0deg) !important;
+    box-shadow: 0 8px 25px rgba(0, 255, 65, 0.2);
+    z-index: 10;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Terminal Style
+.terminal-card {
+  .terminal-header {
+    background: var(--darker-bg);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color);
+    
+    .terminal-controls {
+      display: flex;
+      gap: 6px;
+      
+      .control {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        
+        &.close { background: #ff5f56; }
+        &.minimize { background: #ffbd2e; }
+        &.maximize { background: #28ca42; }
+      }
+    }
+    
+    .terminal-title {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+  }
+  
+  .terminal-body {
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    
+    .terminal-line {
+      margin-bottom: 8px;
+      
+      .prompt {
+        color: var(--matrix-green);
+      }
+      
+      .command {
+        color: var(--text-light);
+      }
+    }
+    
+    .terminal-output {
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      
+      .tech-tag {
+        background: var(--darker-bg);
+        color: var(--matrix-green);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+    }
+    
+    .status-line {
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+  }
+}
+
+// GitHub Issue Style
+.github-card {
+  .github-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    .issue-icon {
+      font-size: 16px;
+    }
+    
+    .issue-title {
+      flex: 1;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+    
+    .issue-status {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--darker-bg);
+    }
+  }
+  
+  .github-body {
+    padding: 16px;
+    
+    .issue-description {
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    
+    .labels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      
+      .label {
+        background: #1f6feb;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+      }
+    }
+    
+    .github-meta {
+      color: var(--text-dim);
+      font-size: 14px;
+      
+      .meta-item {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Docker Logs Style
+.docker-card {
+  .docker-header {
+    background: #0db7ed;
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    .docker-icon {
+      font-size: 16px;
+    }
+    
+    .container-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+    }
+  }
+  
+  .docker-logs {
+    padding: 16px;
+    background: var(--darker-bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    
+    .log-line {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 4px;
+      
+      .timestamp {
+        color: var(--text-dim);
+        min-width: 180px;
+      }
+      
+      .log-level {
+        min-width: 50px;
+        font-weight: 500;
+        
+        &.info { color: #58a6ff; }
+        &.warn { color: #f1e05a; }
+        &.error { color: var(--error-red); }
+      }
+      
+      .log-message {
+        color: var(--text-light);
+        flex: 1;
+      }
+    }
+  }
+}
+
+// JSON Response Style
+.json-card {
+  .json-header {
+    background: var(--darker-bg);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color);
+    font-family: 'JetBrains Mono', monospace;
+    
+    .method {
+      background: #28a745;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .endpoint {
+      color: var(--text-light);
+      flex: 1;
+    }
+    
+    .status-code {
+      color: var(--matrix-green);
+      font-weight: 500;
+    }
+  }
+  
+  .json-body {
+    padding: 16px;
+    background: var(--darker-bg);
+    color: var(--text-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    overflow-x: auto;
+  }
+}
+
+.card-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border-color);
+  
+  .footer-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .project-link {
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.3s ease;
+    
+    &.primary {
+      background: var(--matrix-green);
+      color: var(--darker-bg);
+      
+      &:hover {
+        background: var(--text-light);
+      }
+    }
+    
+    &.secondary {
+      border: 1px solid var(--border-color);
+      color: var(--text-dim);
+      
+      &:hover {
+        border-color: var(--matrix-green);
+        color: var(--matrix-green);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-card {
+    margin-bottom: 16px;
+  }
+}

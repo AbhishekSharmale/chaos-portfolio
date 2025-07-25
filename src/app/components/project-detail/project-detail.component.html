@@ -1,0 +1,149 @@
+<div class="project-detail-container" *ngIf="project">
+  <!-- Project Header -->
+  <div class="project-header">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-controls">
+          <span class="control close"></span>
+          <span class="control minimize"></span>
+          <span class="control maximize"></span>
+        </div>
+        <span class="terminal-title">PROJECT: {{ project.id }}</span>
+      </div>
+      <div class="project-status-bar">
+        <div class="status-item">
+          <span class="status-label">Status:</span>
+          <span class="status-badge" [style.background-color]="getStatusColor(project.status)">
+            {{ getStatusIcon(project.status) }} {{ project.status.toUpperCase() }}
+          </span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Category:</span>
+          <span class="category-badge">
+            {{ getCategoryIcon(project.category) }} {{ project.category.toUpperCase() }}
+          </span>
+        </div>
+      </div>
+      <div class="metrics-bars">
+        <div class="metric-bar">
+          <span class="metric-label">Complexity:</span>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="project.metrics.regretLevel"></div>
+          </div>
+          <span class="metric-value">{{ project.metrics.regretLevel }}%</span>
+        </div>
+        <div class="metric-bar">
+          <span class="metric-label">Usefulness:</span>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="project.metrics.actualUsefulness"></div>
+          </div>
+          <span class="metric-value">{{ project.metrics.actualUsefulness }}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Story -->
+  <div class="project-story">
+    <h2 class="story-title">📖 THE ORIGIN STORY</h2>
+    
+    <div class="story-section">
+      <h3 class="section-title">🤔 The Problem Nobody Had:</h3>
+      <p class="story-text">{{ project.story.problem }}</p>
+    </div>
+    
+    <div class="story-section">
+      <h3 class="section-title">💡 The Motivation (3AM Thoughts):</h3>
+      <p class="story-text">{{ project.story.motivation }}</p>
+    </div>
+    
+    <div class="story-section">
+      <h3 class="section-title">🔧 The Solution (Questionable):</h3>
+      <p class="story-text">{{ project.story.solution }}</p>
+    </div>
+    
+    <div class="story-section" *ngIf="project.story.complications">
+      <h3 class="section-title">⚠️ The Complications:</h3>
+      <p class="story-text">{{ project.story.complications }}</p>
+    </div>
+    
+    <div class="story-section">
+      <h3 class="section-title">🎭 The Aftermath:</h3>
+      <p class="story-text">{{ project.story.aftermath }}</p>
+    </div>
+  </div>
+
+  <!-- Technical Details -->
+  <div class="tech-details">
+    <h2 class="tech-title">⚙️ TECH STACK (Because Why Not):</h2>
+    <div class="tech-tree">
+      <div class="tech-item" *ngFor="let tech of project.tech; let i = index">
+        <span class="tree-connector">{{ i === project.tech.length - 1 ? '└──' : '├──' }}</span>
+        <span class="tech-name">{{ tech }}</span>
+      </div>
+    </div>
+    
+    <h3 class="metrics-title">📊 PROJECT METRICS:</h3>
+    <div class="project-metrics">
+      <div class="metric-item">
+        <span class="metric-bullet">•</span>
+        <span class="metric-text">Lines of Code: {{ project.metrics.linesOfCode.toLocaleString() }} (for {{ project.title.toLowerCase() }})</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-bullet">•</span>
+        <span class="metric-text">Time Invested: {{ project.metrics.timeInvested }}</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-bullet">•</span>
+        <span class="metric-text">Actual Usefulness: {{ project.metrics.actualUsefulness }}%</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-bullet">•</span>
+        <span class="metric-text">Regret Level: {{ project.metrics.regretLevel }}%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-section">
+    <h2 class="action-title">🔗 LINKS & CONNECTIONS</h2>
+    <div class="action-buttons">
+      <a *ngIf="project.links.github" [href]="project.links.github" target="_blank" class="action-btn github">
+        🐙 View Source Code
+      </a>
+      <a *ngIf="project.links.demo" [href]="project.links.demo" target="_blank" class="action-btn demo">
+        🚀 Live Demo
+      </a>
+      <a *ngIf="project.links.docs" [href]="project.links.docs" target="_blank" class="action-btn docs">
+        📖 Documentation
+      </a>
+    </div>
+    
+    <h3 class="connect-title">💬 LIKE THIS CHAOS?</h3>
+    <div class="connect-buttons">
+      <a href="https://linkedin.com/in/chaos-engineer" target="_blank" class="connect-btn linkedin">
+        💼 Connect on LinkedIn
+      </a>
+      <a href="mailto:abhishek@solutions-nobody-asked-for.dev" class="connect-btn email">
+        📧 Email Me
+      </a>
+      <a href="https://buymeacoffee.com/chaosenginer" target="_blank" class="connect-btn coffee">
+        ☕ Buy Me Coffee
+      </a>
+    </div>
+    
+    <div class="collaboration-note">
+      <h4 class="collab-title">🤝 COLLABORATION</h4>
+      <p class="collab-text">
+        "Think this project is missing something? Have an even more ridiculous idea? Let's overthink problems together!"
+      </p>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <div class="back-section">
+    <button (click)="router.navigate(['/solutions-nobody-wanted'])" class="back-btn">
+      ← Back to Project Chaos
+    </button>
+  </div>
+</div>
